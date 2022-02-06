@@ -1,6 +1,6 @@
 <?php
 // URL de l'API
-    $api_url = 'http://localhost:8000/api/articles/1';
+    $api_url = 'https://apisymfonyblog.koko.best/api/articles/1';
 // instantiation de notre classe
     include_once 'Myclass.php';
     $myclass = new Myclass($api_url);
