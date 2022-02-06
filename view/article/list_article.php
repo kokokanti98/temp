@@ -11,15 +11,17 @@
     <div class="position-relative">
         <div class="shape bg-dot primary rellax w-17 h-20" data-rellax-speed="1" style="top: 0; left: -1.7rem;"></div>
         <div class="carousel owl-carousel gap-small blog grid-view" data-margin="0" data-dots="true" data-autoplay="false" data-autoplay-timeout="5000" data-responsive='{"0":{"items": "1"}, "768":{"items": "2"}, "992":{"items": "2"}, "1200":{"items": "3"}}'>
-        <!-- /debut boucle pour afficher tous les données dans l'api on refere sur la taille de l'api pour la valeur max -->
-            <?php   for ($i = 0; $i < count($api_data_decoded['hydra:member']); $i++) {?>
+        <!-- /debut boucle si y a des données dans l'api pour afficher tous les données dans l'api on refere sur la taille de l'api pour la valeur max -->
+            <?php  if((VerifVariableNull($api_data_decoded['hydra:member'],'') != '')) { for ($i = 0; $i < count($api_data_decoded['hydra:member']); $i++) {?>
                 <div class="item">
                     <div class="item-inner">
                     <article>
                         <div class="card">
                         <figure class="card-img-top overlay overlay-1 hover-scale">
                              <!-- /dans le lien source de l image on mettra notre Header image pour charger les images -->
-                            <a href="#"> <img src="./<?= $api_data_decoded['hydra:member'][$i]['HeaderImage'] ?>" alt="" /></a>
+                            <a href="#"> 
+                                <img src="./<?= VerifVariableNull($api_data_decoded['hydra:member'][$i]['Image'],''); ?>" alt="" />
+                            </a>
                             <figcaption>
                             <h5 class="from-top mb-0">Read More</h5>
                             </figcaption>
@@ -27,9 +29,9 @@
                         <div class="card-body">
                             <div class="post-header">
                             <h2 class="post-title h3 mt-1 mb-3">
-                                <a class="link-dark" href="./blog-post.html">
+                                <a class="link-dark" href="./view/blog-post.php?num=<?= VerifVariableNull($api_data_decoded['hydra:member'][$i]['id'],''); ?>">
                                      <!-- /Ici on mettra notre titre de l'article -->
-                                    <?= $api_data_decoded['hydra:member'][$i]['Title'] ?>
+                                    <?= VerifVariableNull($api_data_decoded['hydra:member'][$i]['Title'],''); ?>
                                 </a>
                         </h2>
                             </div>
@@ -37,7 +39,7 @@
                             <div class="post-content">
                             <p>
                                  <!-- /Notre Introduction -->
-                                <?= $api_data_decoded['hydra:member'][$i]['Introduction'] ?>
+                                <?= VerifVariableNull($api_data_decoded['hydra:member'][$i]['Introduction'],''); ?>
                             </p>
                             </div>
                             <!-- /.post-content -->
@@ -64,7 +66,7 @@
                                 <a href="#">
                                     <i class="uil uil-file-alt fs-15"></i>
                                      <!-- /Le Theme du projet -->
-                                    <?= $api_data_decoded['hydra:member'][$i]['theme']['name'] ?>
+                                    <?= VerifVariableNull($api_data_decoded['hydra:member'][$i]['theme']['name'],'') ?>
                                 </a>
                             </li>
                             </ul>
@@ -79,7 +81,7 @@
                     <!-- /.item-inner -->
                 </div>
                 <!-- /.item -->
-            <?php   }?>
+            <?php   }}?>
         <!-- /fin boucle -->
         
         </div>
